@@ -6,6 +6,10 @@ pipeline {
         nodejs 'nodejs'
     }
 
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('deepak104080-dockerhub')
+    }
+
     stages {
         stage("checkout") {
             steps {
@@ -22,18 +26,31 @@ pipeline {
 
         
         stage("test") {
-            if(env.BRANCH_NAME == 'master') {
-                steps {
-                    echo 'testing the application on master...'
-                    bat 'npm run test'
-                }
+            steps {
+                echo 'testing the application on master...'
+                bat 'npm run test'
             }
-            else {
-                steps {
-                    echo 'testing the application on develop...'
-                    bat 'npm run test'
-                }
+        }
+
+        stage("docker login") {
+            steps {
+                echo 'docker login'
+                bat 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
+        }
+
+        stage("docker push") {
+            steps {
+                echo 'docker push'
+                bat 'docker push deepak104080/i-deepakkumar07-master:latest'
+            }   
+        }
+
+        stage("docker logout") {
+            steps {
+                echo 'docker logout'
+                bat 'docker logout'
+            }   
         }
         
 
