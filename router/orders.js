@@ -17,7 +17,6 @@ const verifyJwt = (req, res, next) => {
                 res.status(400).json({err: 'Token Mismatch'})
             }
             else {
-                //favourable scenario
                 console.log('decoded', decoded);
                 next();
             }
@@ -27,7 +26,6 @@ const verifyJwt = (req, res, next) => {
 
 //http://localhost:4000/orders/placeorder
 router.post('/placeorder', verifyJwt, async(req, res) => {
-    //console.log(req.headers["x-access-token"]);
     try{
         const tempOrder = new Orders({
             orderid: parseInt(Math.random()*10000000000),
@@ -38,15 +36,6 @@ router.post('/placeorder', verifyJwt, async(req, res) => {
             amount: req.body.amount
         })
         const response = await tempOrder.save();
-        //store order details in loop - req.body.foodItems
-        // const tempOrder = new OrderDetails({
-        //     orderid: response.orderid,
-        //     food_id: req.body,
-        //     food_name: req.body,
-        //     quantity: req.body,
-        //     price: req.body
-        // })
-        // const response = await tempOrder.save();
         res.status(201).json(response);
     }
     catch(err) {

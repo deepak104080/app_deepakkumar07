@@ -26,7 +26,6 @@ router.post('/', async (req, res) => {
             price: req.body.price,
             description: req.body.description,
         })
-        //database operation
         const response = await tempMenu.save();
         res.status(201).json(response);
     }
