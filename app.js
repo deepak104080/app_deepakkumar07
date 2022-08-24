@@ -28,4 +28,4 @@ app.use('/orders', ordersRoute);
 mongoose.connect('mongodb+srv://testuser001:z9xsFuktzYAs4fMk@cluster0.2eq41.mongodb.net/foodie?retryWrites=true&w=majority')
 
 
-app.listen(4000);
+app.listen(process.env.PORT || 4000);
