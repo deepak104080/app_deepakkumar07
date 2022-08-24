@@ -7,7 +7,7 @@ pipeline {
     }
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('deepak104080-dockerhub')
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
     }
 
     stages {
@@ -32,6 +32,12 @@ pipeline {
             }
         }
 
+        stage("docker build") {
+            steps {
+                echo 'docker build'
+                bat 'docker build -t deepak104080/i-deepakkumar07:latest2 .'
+            }
+        }
 
         stage("docker login") {
             steps {
@@ -43,7 +49,7 @@ pipeline {
         stage("docker push") {
             steps {
                 echo 'docker push'
-                bat 'docker push deepak104080/i-deepakkumar07-master:latest'
+                bat 'docker push deepak104080/i-deepakkumar07-master:latest2'
             }   
         }
 
