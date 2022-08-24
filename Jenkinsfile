@@ -20,12 +20,23 @@ pipeline {
             }
         }
 
-        stage("test") {
-            steps {
-                echo 'testing the application...'
-                bat 'npm run test'
+        if(env.BRANCH_NAME == 'master') {
+            stage("test") {
+                steps {
+                    echo 'testing the application...'
+                    bat 'npm run test'
+                }
             }
         }
+        else {
+            stage("test2") {
+                steps {
+                    echo 'testing the application...'
+                    bat 'npm run test'
+                }
+            }
+        }
+        
 
         stage("deploy") {
             steps {
