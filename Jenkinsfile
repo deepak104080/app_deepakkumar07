@@ -6,11 +6,6 @@ pipeline {
         nodejs 'nodejs'
     }
 
-
-    options {
-
-    }
-
     stages {
         stage("checkout") {
             steps {
