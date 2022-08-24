@@ -1,1 +1,5 @@
-docker image build
+FROM node
+WORKDIR /app
+ADD . /app
+RUN npm install
+CMD ["npm", "start"]
