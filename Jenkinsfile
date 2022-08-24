@@ -17,7 +17,6 @@ pipeline {
             steps {
                 echo 'building the application...'
                 bat 'npm install'
-                bat 'npm run start'
             }
         }
 
