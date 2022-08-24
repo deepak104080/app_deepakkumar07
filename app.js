@@ -13,7 +13,7 @@ app.use(cors())
 app.get('/', (req, res) => {
     try{
         console.log('server started...');
-        res.send('app running.')
+        res.send('<h2>Express API running.</h2>')
     }
     catch{
 
