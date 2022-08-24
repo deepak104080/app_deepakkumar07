@@ -36,9 +36,9 @@ pipeline {
         stage("docker") {
             steps {
                 script {
-                    dockerImage = docker.build 'deepak104080/i-deepakkumar07-master:latest'
+                    dockerImage = docker.build 'deepak104080/i-deepakkumar07-master:latest2'
                     docker.withRegistry('', dockerhubcredentials) {
-                        dockerImage.push('v2')
+                        dockerImage.push('latest2')
                     }
                 }
             }
