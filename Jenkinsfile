@@ -9,7 +9,6 @@ pipeline {
     environment {
         dockerhubcredentials = 'dockerhub'
         CLOUDSDK_CORE_PROJECT = 'astute-arcanum-351619'
-        Test_Sonar = tool 'SonarQubeScanner'
     }
 
     stages {
@@ -21,23 +20,17 @@ pipeline {
             }
         }
         
-        stage("Sonarcube analysis") {
+        stage("Test") {
             steps {
-                echo 'Sonarcube analysis on develop...'
-                withSonarQubeEnv(installationName: 'Sonar') {
-                    bat "${Test_Sonar}/bin/sonar-scanner.bat \
-                    -D sonar.projectKey=express-nagp-local \
-                    -D sonar.sources=. \
-                    -D sonar.host.url=http://localhost:9000 \
-                    -D sonar.login=sqp_26a1f24b03005c76217a26365a4f5044c5ed0e7b"
-                }
+                echo 'testing the application on master...'
+                bat 'npm run test'
             }
         }
 
         // stage("Docker") {
         //     steps {
         //         script {
-        //             dockerImage = docker.build 'deepak104080/i-deepakkumar07-develop:latest'
+        //             dockerImage = docker.build 'deepak104080/i-deepakkumar07-master:latest'
         //             docker.withRegistry('', dockerhubcredentials) {
         //                 dockerImage.push('latest')
         //             }

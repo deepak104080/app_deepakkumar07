@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: expressserver
-        image: deepak104080/i-deepakkumar07-develop
+        image: deepak104080/i-deepakkumar07-master
         ports:
         - containerPort: 4000
