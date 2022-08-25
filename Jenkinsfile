@@ -50,7 +50,7 @@ pipeline {
         stage("Kubernetes Deployment") {
             steps {
                 echo 'deploying the application kubernetes...'
-                withCredentials([file(credentialsId: 'nagp-gcp-express-kubernetes-gcloud', variable: 'GCLOUD_CREDS')]) {
+                withCredentials([file(credentialsId: 'gcloud-creds', variable: 'GCLOUD_CREDS')]) {
                     bat 'gcloud version'
                     bat 'gcloud auth activate-service-account --key-file $GCLOUD_CREDS'
                     bat 'kubectl apply -f deployment.yaml'
