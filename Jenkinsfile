@@ -25,7 +25,7 @@ pipeline {
             steps {
                 echo 'Sonarcube analysis on develop...'
                 withSonarQubeEnv('Sonar') {
-                    bat '${snannerHome}sonar-scanner.bat -D"sonar.projectKey=express-nagp-local" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.login=sqp_26a1f24b03005c76217a26365a4f5044c5ed0e7b"'
+                    bat '${snannerHome}/bin/sonar-scanner.bat -D"sonar.projectKey=express-nagp-local" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.login=sqp_26a1f24b03005c76217a26365a4f5044c5ed0e7b"'
                 }
             }
         }
