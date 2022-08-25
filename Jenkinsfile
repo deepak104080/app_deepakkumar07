@@ -7,7 +7,7 @@ pipeline {
     }
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+        dockerhubcredentials = 'dockerhub'
     }
 
     stages {
@@ -32,25 +32,15 @@ pipeline {
             }
         }
 
-        stage("docker build") {
+        stage("docker") {
             steps {
-                echo 'docker build'
-                bat 'docker build -t deepak104080/i-deepakkumar07:latest2 .'
+                script {
+                    dockerImage = docker.build 'deepak104080/i-deepakkumar07-master:latest2'
+                    docker.withRegistry('', dockerhubcredentials) {
+                        dockerImage.push('latest2')
+                    }
+                }
             }
-        }
-
-        stage("docker login") {
-            steps {
-                echo 'docker login'
-                bat 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-            }
-        }
-
-        stage("docker push") {
-            steps {
-                echo 'docker push'
-                bat 'docker push deepak104080/i-deepakkumar07-master:latest2'
-            }   
         }
 
         stage("docker logout") {
