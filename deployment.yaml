@@ -1,21 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nodeapp-deployment
+  name: expressapp-deployment
+  namespace: kubernetes-cluster-deepakkumar07
   labels:
-    app: nodeapp
+    app: expressapp
 spec:
   replicas: 4
   selector:
     matchLabels:
-      app: nodeapp
+      app: expressapp
   template:
     metadata:
       labels:
-        app: nodeapp 
+        app: expressapp 
     spec:
       containers:
-      - name: nodeserver
+      - name: expressserver
         image: deepak104080/test_local_express
         ports:
         - containerPort: 4000
