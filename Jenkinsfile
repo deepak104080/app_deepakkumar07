@@ -9,7 +9,7 @@ pipeline {
     environment {
         dockerhubcredentials = 'dockerhub'
         CLOUDSDK_CORE_PROJECT = 'astute-arcanum-351619'
-        soscannerHome = tool name: 'sonarscanner'
+        soscannerHome = tool 'sonarscanner'
     }
 
     stages {
