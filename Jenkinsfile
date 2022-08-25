@@ -9,7 +9,7 @@ pipeline {
     environment {
         dockerhubcredentials = 'dockerhub'
         CLOUDSDK_CORE_PROJECT = 'astute-arcanum-351619'
-        scannerHome = tool 'sonarscanner'
+        scannerHome = tool 'SonarQubeScanner'
     }
 
     stages {
@@ -26,7 +26,7 @@ pipeline {
                 echo 'Sonarcube analysis on develop...'
                 withSonarQubeEnv(installationName: 'Sonar') {
                     bat "${scannerHome}/bin/sonar-scanner.bat \
-                    -D sonar.projectKey=express-nagp-local \
+                    -D sonar.projectKey=sonar-deepakkumar07 \
                     -D sonar.sources=. \
                     -D sonar.host.url=http://localhost:9000 \
                     -D sonar.login=sqp_26a1f24b03005c76217a26365a4f5044c5ed0e7b"
