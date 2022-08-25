@@ -29,7 +29,7 @@ pipeline {
         stage("Docker") {
             steps {
                 script {
-                    dockerImage = docker.build 'deepak104080/i-deepakkumar07-master:latest'
+                    dockerImage = docker.build 'deepak104080/i-deepakkumar07-develop:latest'
                     docker.withRegistry('', dockerhubcredentials) {
                         dockerImage.push('latest')
                     }
