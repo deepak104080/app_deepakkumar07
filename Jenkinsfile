@@ -20,10 +20,9 @@ pipeline {
             }
         }
         
-        stage("Test") {
+        stage("Sonarcube analysis") {
             steps {
-                echo 'testing the application on master...'
-                bat 'npm run test'
+                echo 'Sonarcube analysis on develop...'
             }
         }
 
