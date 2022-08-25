@@ -11,49 +11,42 @@ pipeline {
     }
 
     stages {
-        stage("checkout") {
+        stage("Build") {
             steps {
                 git changelog: false, credentialsId: '4ba785f3-ed0c-4a36-bdd0-8693f3669263', poll: false, url: 'https://github.com/deepak104080/app_deepakkumar07'
-            }
-        }
-
-        stage("build") {
-            steps {
                 echo 'building the application...'
                 bat 'npm install'
             }
         }
-
         
-        stage("test") {
+        stage("Test") {
             steps {
                 echo 'testing the application on master...'
                 bat 'npm run test'
             }
         }
 
-        stage("docker") {
+        stage("Docker") {
             steps {
                 script {
-                    dockerImage = docker.build 'deepak104080/i-deepakkumar07-master:latest2'
+                    dockerImage = docker.build 'deepak104080/i-deepakkumar07-master:latest'
                     docker.withRegistry('', dockerhubcredentials) {
-                        dockerImage.push('latest2')
+                        dockerImage.push('latest')
                     }
                 }
+                bat 'docker logout'
             }
         }
 
-        stage("docker logout") {
-            steps {
-                echo 'docker logout'
-                bat 'docker logout'
-            }   
-        }
 
-
-        stage("deploy") {
+        stage("Kubernetes Deployment") {
             steps {
-                echo 'deploying the application...'
+                echo 'deploying the application kubernetes...'
+                bat 'gcloud container clusters get-credentials nagp-deepakkumar07 --zone us-central1-c --project astute-arcanum-351619'
+                bat 'kubectl apply -f deployment.yaml'
+                bat 'kubectl apply -f service.yaml'
+                bat 'kubectl get deployment -n kubernetes-cluster-deepakkumar07'
+                echo 'deployment done'
             }
         }
     }
