@@ -26,10 +26,10 @@ pipeline {
                 echo 'Sonarcube analysis on develop...'
                 withSonarQubeEnv(installationName: 'Sonar') {
                     bat "${Test_Sonar}/bin/sonar-scanner.bat \
-                    -D sonar.projectKey=sonar-deepakkumar07 \
+                    -D sonar.projectKey=express-nagp-local \
                     -D sonar.sources=. \
                     -D sonar.host.url=http://localhost:9000 \
-                    -D sonar.login=sqp_7e7d7c38d20f979c06d288285fa2a983635df8f6"
+                    -D sonar.login=sqp_26a1f24b03005c76217a26365a4f5044c5ed0e7b"
                 }
             }
         }
