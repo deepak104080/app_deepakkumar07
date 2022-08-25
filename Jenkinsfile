@@ -4,7 +4,6 @@ pipeline {
     tools {
         git 'Default'
         nodejs 'nodejs'
-        dockerTool 'docker'
     }
 
     environment {
