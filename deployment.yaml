@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: expressserver
-        image: deepak104080/test_local_express
+        image: deepak104080/i-deepakkumar07-master
         ports:
         - containerPort: 4000
