@@ -4,13 +4,13 @@ pipeline {
     tools {
         git 'Default'
         nodejs 'nodejs'
+        dockerTool 'docker'
     }
 
     environment {
         dockerhubcredentials = 'dockerhub'
         CLOUDSDK_CORE_PROJECT = 'astute-arcanum-351619'
         Test_Sonar = tool 'SonarQubeScanner'
-        dockerTool 'docker'
     }
 
     stages {
