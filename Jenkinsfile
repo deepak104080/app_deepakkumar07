@@ -51,6 +51,10 @@ pipeline {
             steps {
                 echo 'deploying the application kubernetes...'
                 withCredentials([file(credentialsId: 'gcloud-creds', variable: 'GCLOUD_CREDS')]) {
+                    bat 'gcloud container clusters get-credentials nagp-deepakkumar07 --zone us-central1-c --project astute-arcanum-351619'
+                    bat 'kubectl apply -f deployment.yaml'
+                    bat 'kubectl apply -f service.yaml'
+                    bat 'kubectl get deployment -n kubernetes-cluster-deepakkumar07'
                     echo 'deployment done'
                 }
                 
